@@ -9,8 +9,6 @@ const applicationListSchema = new Schema({
   websiteLink: String,
   status: String,
   dateApplied: String,
-  resumeSent: Boolean,
-  portfolioSent: Boolean,
 },{
   timestamps: true,
 })

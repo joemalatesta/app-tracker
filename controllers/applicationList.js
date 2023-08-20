@@ -11,11 +11,11 @@ function index(req, res) {
 
 function deleteOne(req, res) {
   ApplicationList.findById(req.params.id)
-  .then(list => {
-    ApplicationList.findByIdAndDelete(list._id)
-      .then(deletedCharSheet => {
+  .then(jobList => {
+    ApplicationList.findByIdAndDelete(jobList._id)
+      .then(deletedJobList => {
 
-        res.json(deletedCharSheet)
+        res.json(deletedJobList)
       })
   
   })
@@ -27,15 +27,11 @@ function deleteOne(req, res) {
 
 function update(req, res) {
   ApplicationList.findById(req.params.id)
-  .then(char => {
-    if (char.owner._id.equals(req.user.profile)) {
-      ApplicationList.findByIdAndUpdate(req.params.id, req.body, {new: true})
-      .then(updatedCharSheet => {
-        res.json(updatedCharSheet)
-      })
-    } else {
-      res.status(401).json({err: "Not authorized!"})
-    }
+  .then(jobList => {
+    ApplicationList.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    .then(updatedJobList => {
+      res.json(updatedJobList)
+    })
   })
   .catch(err => {
     console.log(err)
@@ -47,10 +43,10 @@ function create(req, res) {
   req.body.owner = req.user.profile
   console.log(req.body);
   ApplicationList.create(req.body)
-  .then(char => {
-    ApplicationList.findById(char._id)
-    .then(populatedListSheet => {
-      res.json(populatedListSheet)
+  .then(jobList => {
+    ApplicationList.findById(jobList._id)
+    .then(populatedJobList => {
+      res.json(populatedJobList)
     })
   })
   .catch(err => {
